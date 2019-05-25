@@ -5,15 +5,15 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <jta-data-source>java:jboss/datasources/sge</jta-data-source>
+        <jta-data-source>java:jboss/datasources/${db.name}</jta-data-source>
 
         <class>br.com.abce.sge.entity.Produto</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sge" ></property>
-            <property name="javax.persistence.jdbc.user" value="postgres" />
-            <property name="javax.persistence.jdbc.password" value="postgres" />
+            <property name="javax.persistence.jdbc.url" value="${db.url}"></property>
+            <property name="javax.persistence.jdbc.user" value="${db.username}" />
+            <property name="javax.persistence.jdbc.password" value="${db.password}" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
 
 <!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->

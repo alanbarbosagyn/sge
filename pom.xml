@@ -103,17 +103,6 @@
       <resource>
         <directory>src/main/resources</directory>
         <filtering>true</filtering>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>false</filtering>
-        <includes>
-          <include>**/**</include>
-        </includes>
       </resource>
     </resources>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -150,4 +139,43 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+
+    <profile>
+      <id>desenv</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <!-- activate if system properties 'env=dev' -->
+        <property>
+          <name>env</name>
+          <value>desenv</value>
+        </property>
+      </activation>
+      <properties>
+        <db.name>sge</db.name>
+        <db.url>jdbc:postgresql://localhost:5432/sge</db.url>
+        <db.username>postgres</db.username>
+        <db.password>postgres</db.password>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>heroku</id>
+      <activation>
+        <!-- activate if system properties 'env=prod' -->
+        <property>
+          <name>env</name>
+          <value>homolog</value>
+        </property>
+      </activation>
+      <properties>
+        <db.name>DATABASE</db.name>
+        <db.url>DATABASE_URL</db.url>
+        <db.username>DATABASE_USER</db.username>
+        <db.password>DATABASE_PASSWORD</db.password>
+      </properties>
+    </profile>
+
+  </profiles>
 </project>
