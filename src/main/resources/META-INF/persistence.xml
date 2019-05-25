@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="sge" transaction-type="JTA">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <jta-data-source>java:jboss/datasources/sge</jta-data-source>
+
+        <class>br.com.abce.sge.entity.Produto</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sge" ></property>
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="postgres" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
+
+<!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sge" />-->
+<!--            <property name="javax.persistence.jdbc.user" value="mysql" />-->
+<!--            <property name="javax.persistence.jdbc.password" value="mysql" />-->
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />-->
+
+            <property name="hibernate.connection.shutdown" value="true" />
+<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>
