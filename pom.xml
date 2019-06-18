@@ -102,11 +102,6 @@
       <version>9.0.20.0</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>1.7.2</version>
-    </dependency>
 
   </dependencies>
 
@@ -178,24 +173,24 @@
 
     <profile>
       <id>desenv</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <!-- activate if system properties 'env=dev' -->
-        <property>
-          <name>env</name>
-          <value>desenv</value>
-        </property>
-      </activation>
-      <properties>
-        <db.name>sge</db.name>
-        <db.url>jdbc:postgresql://localhost:5432/sge</db.url>
-        <db.username>postgres</db.username>
-        <db.password>postgres</db.password>
-      </properties>
-    </profile>
+<!--      <activation>-->
+<!--        <activeByDefault>true</activeByDefault>-->
+<!--        &lt;!&ndash; activate if system properties 'env=dev' &ndash;&gt;-->
+<!--        <property>-->
+<!--          <name>env</name>-->
+<!--          <value>desenv</value>-->
+<!--        </property>-->
+<!--      </activation>-->
+<!--      <properties>-->
+<!--        <db.name>sge</db.name>-->
+<!--        <db.url>jdbc:postgresql://localhost:5432/sge</db.url>-->
+<!--        <db.username>postgres</db.username>-->
+<!--        <db.password>postgres</db.password>-->
+<!--      </properties>-->
+<!--    </profile>-->
 
-    <profile>
-      <id>heroku</id>
+<!--    <profile>-->
+<!--      <id>heroku</id>-->
       <activation>
         <!-- activate if system properties 'env=prod' -->
         <property>
