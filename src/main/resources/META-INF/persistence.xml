@@ -5,7 +5,12 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <!-- jboss datasource -->
         <jta-data-source>java:jboss/datasources/${db.name}</jta-data-source>
+
+        <!-- glassfish datasource -->
+<!--        <jta-data-source>jdbc/${db.name}</jta-data-source>-->
+
 
         <class>br.com.abce.sge.entity.Produto</class>
 
