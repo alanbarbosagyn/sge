@@ -6,27 +6,27 @@ import java.util.Objects;
 @Entity
 @Table(name = "avaliacao", schema = "public", catalog = "sge")
 public class AvaliacaoEntity {
-    private int id;
-    private int comandaItemId;
+    private long id;
+    private long comandaItemId;
     private Integer nota;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "comanda_item_id")
-    public int getComandaItemId() {
+    public long getComandaItemId() {
         return comandaItemId;
     }
 
-    public void setComandaItemId(int comandaItemId) {
+    public void setComandaItemId(long comandaItemId) {
         this.comandaItemId = comandaItemId;
     }
 

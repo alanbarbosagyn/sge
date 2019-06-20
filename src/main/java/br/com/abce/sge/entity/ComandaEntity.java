@@ -7,51 +7,51 @@ import java.util.Objects;
 @Entity
 @Table(name = "comanda", schema = "public", catalog = "sge")
 public class ComandaEntity {
-    private int id;
-    private int estabelecimentoId;
-    private int garcomId;
-    private int mesaId;
+    private long id;
+    private long estabelecimentoId;
+    private long garcomId;
+    private long mesaId;
     private Date dataabertura;
     private Date dataencerramento;
     private Short cancelado;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "estabelecimento_id")
-    public int getEstabelecimentoId() {
+    public long getEstabelecimentoId() {
         return estabelecimentoId;
     }
 
-    public void setEstabelecimentoId(int estabelecimentoId) {
+    public void setEstabelecimentoId(long estabelecimentoId) {
         this.estabelecimentoId = estabelecimentoId;
     }
 
     @Basic
     @Column(name = "garcom_id")
-    public int getGarcomId() {
+    public long getGarcomId() {
         return garcomId;
     }
 
-    public void setGarcomId(int garcomId) {
+    public void setGarcomId(long garcomId) {
         this.garcomId = garcomId;
     }
 
     @Basic
     @Column(name = "mesa_id")
-    public int getMesaId() {
+    public long getMesaId() {
         return mesaId;
     }
 
-    public void setMesaId(int mesaId) {
+    public void setMesaId(long mesaId) {
         this.mesaId = mesaId;
     }
 

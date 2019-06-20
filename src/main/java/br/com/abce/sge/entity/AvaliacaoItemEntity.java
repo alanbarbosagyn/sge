@@ -7,26 +7,26 @@ import java.util.Objects;
 @Table(name = "avaliacao_item", schema = "public", catalog = "sge")
 @IdClass(AvaliacaoItemEntityPK.class)
 public class AvaliacaoItemEntity {
-    private int avaliacaoId;
-    private int avaliacaoMotivoId;
+    private long avaliacaoId;
+    private long avaliacaoMotivoId;
 
     @Id
     @Column(name = "avaliacao_id")
-    public int getAvaliacaoId() {
+    public long getAvaliacaoId() {
         return avaliacaoId;
     }
 
-    public void setAvaliacaoId(int avaliacaoId) {
+    public void setAvaliacaoId(long avaliacaoId) {
         this.avaliacaoId = avaliacaoId;
     }
 
     @Id
     @Column(name = "avaliacao_motivo_id")
-    public int getAvaliacaoMotivoId() {
+    public long getAvaliacaoMotivoId() {
         return avaliacaoMotivoId;
     }
 
-    public void setAvaliacaoMotivoId(int avaliacaoMotivoId) {
+    public void setAvaliacaoMotivoId(long avaliacaoMotivoId) {
         this.avaliacaoMotivoId = avaliacaoMotivoId;
     }
 

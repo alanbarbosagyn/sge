@@ -1,6 +1,5 @@
 package br.com.abce.sge.dto;
 
-import br.com.abce.sge.entity.Produto;
 import io.swagger.annotations.ApiModel;
 
 import javax.ws.rs.FormParam;
@@ -15,15 +14,11 @@ public class ProdutoDto implements Serializable {
     private String descricao;
     @FormParam("nome")
     private String nome;
+    @FormParam("valor")
+    private Double valor;
 
     public ProdutoDto() {
         super();
-    }
-
-    public ProdutoDto(Produto produto) {
-         setDescricao(produto.getDescricao());
-         setId(produto.getId());
-         setNome(produto.getNome());
     }
 
     public Long getId() {
@@ -48,5 +43,13 @@ public class ProdutoDto implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 }

@@ -6,28 +6,28 @@ import java.util.Objects;
 @Entity
 @Table(name = "mesa", schema = "public", catalog = "sge")
 public class MesaEntity {
-    private int id;
-    private int estabelecimentoId;
+    private long id;
+    private long estabelecimentoId;
     private Integer numero;
     private String qrcode;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "estabelecimento_id")
-    public int getEstabelecimentoId() {
+    public long getEstabelecimentoId() {
         return estabelecimentoId;
     }
 
-    public void setEstabelecimentoId(int estabelecimentoId) {
+    public void setEstabelecimentoId(long estabelecimentoId) {
         this.estabelecimentoId = estabelecimentoId;
     }
 

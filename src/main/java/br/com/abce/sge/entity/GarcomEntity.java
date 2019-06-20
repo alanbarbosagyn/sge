@@ -6,37 +6,37 @@ import java.util.Objects;
 @Entity
 @Table(name = "garcom", schema = "public", catalog = "sge")
 public class GarcomEntity {
-    private int id;
-    private int estabelecimentoId;
-    private int usuarioId;
+    private long id;
+    private long estabelecimentoId;
+    private long usuarioId;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "estabelecimento_id")
-    public int getEstabelecimentoId() {
+    public long getEstabelecimentoId() {
         return estabelecimentoId;
     }
 
-    public void setEstabelecimentoId(int estabelecimentoId) {
+    public void setEstabelecimentoId(long estabelecimentoId) {
         this.estabelecimentoId = estabelecimentoId;
     }
 
     @Basic
     @Column(name = "usuario_id")
-    public int getUsuarioId() {
+    public long getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(int usuarioId) {
+    public void setUsuarioId(long usuarioId) {
         this.usuarioId = usuarioId;
     }
 

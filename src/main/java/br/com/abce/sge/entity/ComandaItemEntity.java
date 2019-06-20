@@ -7,50 +7,50 @@ import java.util.Objects;
 @Entity
 @Table(name = "comanda_item", schema = "public", catalog = "sge")
 public class ComandaItemEntity {
-    private int id;
-    private int comandaId;
-    private int produtoId;
-    private int usuarioId;
+    private long id;
+    private long comandaId;
+    private long produtoId;
+    private long usuarioId;
     private BigDecimal valor;
     private Short cancelado;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "comanda_id")
-    public int getComandaId() {
+    public long getComandaId() {
         return comandaId;
     }
 
-    public void setComandaId(int comandaId) {
+    public void setComandaId(long comandaId) {
         this.comandaId = comandaId;
     }
 
     @Basic
     @Column(name = "produto_id")
-    public int getProdutoId() {
+    public long getProdutoId() {
         return produtoId;
     }
 
-    public void setProdutoId(int produtoId) {
+    public void setProdutoId(long produtoId) {
         this.produtoId = produtoId;
     }
 
     @Basic
     @Column(name = "usuario_id")
-    public int getUsuarioId() {
+    public long getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(int usuarioId) {
+    public void setUsuarioId(long usuarioId) {
         this.usuarioId = usuarioId;
     }
 

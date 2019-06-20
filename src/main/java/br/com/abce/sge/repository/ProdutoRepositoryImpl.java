@@ -1,6 +1,6 @@
 package br.com.abce.sge.repository;
 
-import br.com.abce.sge.entity.Produto;
+import br.com.abce.sge.entity.ProdutoEntity;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,26 +17,26 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
         super();
     }
 
-    public Produto buscar(final Long idProduto) {
+    public ProdutoEntity buscar(final Long idProduto) {
 
-        return entityManager.find(Produto.class, idProduto);
+        return entityManager.find(ProdutoEntity.class, idProduto);
     }
 
-    public void salvar(final Produto produto) {
+    public void salvar(final ProdutoEntity produto) {
 
         entityManager.merge(produto);
     }
 
-    public void remover(final Produto produto) {
+    public void remover(final ProdutoEntity produto) {
 
         entityManager.remove(produto);
     }
 
     @Override
-    public List<Produto> listar() {
+    public List<ProdutoEntity> listar() {
 
         return entityManager
-                .createQuery("select p from Produto p")
+                .createQuery("select p from ProdutoEntity p")
                 .getResultList();
     }
 }

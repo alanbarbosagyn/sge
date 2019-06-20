@@ -1,18 +1,16 @@
 package br.com.abce.sge.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "comanda_usuario", schema = "public", catalog = "sge")
-@IdClass(ComandaUsuarioEntityPK.class)
-public class ComandaUsuarioEntity {
+public class ComandaUsuarioEntityPK implements Serializable {
     private long comandaId;
     private long usuarioId;
-    private Short administrador;
 
-    @Id
     @Column(name = "comanda_id")
+    @Id
     public long getComandaId() {
         return comandaId;
     }
@@ -21,8 +19,8 @@ public class ComandaUsuarioEntity {
         this.comandaId = comandaId;
     }
 
-    @Id
     @Column(name = "usuario_id")
+    @Id
     public long getUsuarioId() {
         return usuarioId;
     }
@@ -31,28 +29,17 @@ public class ComandaUsuarioEntity {
         this.usuarioId = usuarioId;
     }
 
-    @Basic
-    @Column(name = "administrador")
-    public Short getAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(Short administrador) {
-        this.administrador = administrador;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ComandaUsuarioEntity that = (ComandaUsuarioEntity) o;
+        ComandaUsuarioEntityPK that = (ComandaUsuarioEntityPK) o;
         return comandaId == that.comandaId &&
-                usuarioId == that.usuarioId &&
-                Objects.equals(administrador, that.administrador);
+                usuarioId == that.usuarioId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(comandaId, usuarioId, administrador);
+        return Objects.hash(comandaId, usuarioId);
     }
 }

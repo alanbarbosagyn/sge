@@ -6,7 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "usuario", schema = "public", catalog = "sge")
 public class UsuarioEntity {
-    private int id;
+    private long id;
     private String usuario;
     private String nome;
     private String email;
@@ -14,11 +14,11 @@ public class UsuarioEntity {
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

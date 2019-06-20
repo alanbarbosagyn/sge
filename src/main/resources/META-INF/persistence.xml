@@ -13,6 +13,19 @@
 
 
         <class>br.com.abce.sge.entity.Produto</class>
+        <class>br.com.abce.sge.entity.AvaliacaoEntity</class>
+        <class>br.com.abce.sge.entity.AvaliacaoItemEntity</class>
+        <class>br.com.abce.sge.entity.AvaliacaoMotivoEntity</class>
+        <class>br.com.abce.sge.entity.ComandaEntity</class>
+        <class>br.com.abce.sge.entity.ComandaItemEntity</class>
+        <class>br.com.abce.sge.entity.ComandaUsuarioEntity</class>
+        <class>br.com.abce.sge.entity.EstabelecimentoEntity</class>
+        <class>br.com.abce.sge.entity.GarcomEntity</class>
+        <class>br.com.abce.sge.entity.MesaEntity</class>
+        <class>br.com.abce.sge.entity.ProdutoEntity</class>
+        <class>br.com.abce.sge.entity.ProdutoFotoEntity</class>
+        <class>br.com.abce.sge.entity.UsuarioEntity</class>
+        <class>br.com.abce.sge.entity.ComandaSolicitacaoEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
@@ -31,6 +44,14 @@
 <!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true"/>
+            <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:5432/sge"/>
+            <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/sge"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/sge"/>
+            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/sge"/>
+            <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
 
         </properties>
     </persistence-unit>

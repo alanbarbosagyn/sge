@@ -7,17 +7,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "produto_foto", schema = "public", catalog = "sge")
 public class ProdutoFotoEntity {
-    private int id;
+    private long id;
     private int produto;
     private byte[] foto;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

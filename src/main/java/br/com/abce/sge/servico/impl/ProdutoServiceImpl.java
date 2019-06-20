@@ -1,12 +1,13 @@
 package br.com.abce.sge.servico.impl;
 
 import br.com.abce.sge.dto.ProdutoDto;
-import br.com.abce.sge.entity.Produto;
+import br.com.abce.sge.entity.ProdutoEntity;
 import br.com.abce.sge.repository.ProdutoRepository;
 import br.com.abce.sge.servico.ProdutoService;
 import com.sun.jersey.api.NotFoundException;
 
 import javax.ejb.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +23,15 @@ public class ProdutoServiceImpl implements ProdutoService {
 
         List<ProdutoDto> listaDto = new ArrayList<>();
 
-        final List<Produto> lista = produtoRepository.listar();
+        final List<ProdutoEntity> lista = produtoRepository.listar();
 
-        for (Produto produto : lista) {
+        for (ProdutoEntity produto : lista) {
 
-            ProdutoDto produtoDto = new ProdutoDto(produto);
+            ProdutoDto produtoDto = new ProdutoDto();
+            produtoDto.setDescricao(produto.getDetalhe());
+            produtoDto.setId(produto.getId());
+            produtoDto.setNome(produto.getNome());
+            produtoDto.setValor(produto.getValor());
 
             listaDto.add(produtoDto);
         }
@@ -37,13 +42,17 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public ProdutoDto buscar(Long idProduto) {
 
-        Produto produto = produtoRepository.buscar(idProduto);
+        ProdutoEntity produto = produtoRepository.buscar(idProduto);
 
         if (produto == null)
 
             throw new NotFoundException("Produto não cadastrado.");
 
-        ProdutoDto produtoDto = new ProdutoDto(produto);
+        ProdutoDto produtoDto = new ProdutoDto();
+        produtoDto.setDescricao(produto.getDetalhe());
+        produtoDto.setId(produto.getId());
+        produtoDto.setNome(produto.getNome());
+        produtoDto.setValor(produto.getValor());
 
         return produtoDto;
     }
@@ -53,10 +62,11 @@ public class ProdutoServiceImpl implements ProdutoService {
     public void cadastrar(ProdutoDto produtoDto) {
 
 
-        Produto produto = new Produto();
-        produto.setDescricao(produtoDto.getDescricao());
+        ProdutoEntity produto = new ProdutoEntity();
+        produto.setDetalhe(produtoDto.getDescricao());
         produto.setId(produtoDto.getId());
         produto.setNome(produtoDto.getNome());
+        produto.setValor(produtoDto.getValor());
 
         produtoRepository.salvar(produto);
 
@@ -66,7 +76,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void remover(Long idProduto) {
 
-        Produto produto = produtoRepository.buscar(idProduto);
+        ProdutoEntity produto = produtoRepository.buscar(idProduto);
 
         if (produto == null)
 

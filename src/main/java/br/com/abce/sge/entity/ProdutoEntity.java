@@ -7,19 +7,19 @@ import java.util.Objects;
 @Entity
 @Table(name = "produto", schema = "public", catalog = "sge")
 public class ProdutoEntity {
-    private int id;
+    private long id;
     private int estabelecimentoId;
     private String nome;
     private String detalhe;
-    private BigDecimal valor;
+    private Double valor;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -55,11 +55,11 @@ public class ProdutoEntity {
 
     @Basic
     @Column(name = "valor")
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

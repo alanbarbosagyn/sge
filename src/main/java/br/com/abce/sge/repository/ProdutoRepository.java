@@ -1,17 +1,17 @@
 package br.com.abce.sge.repository;
 
-import br.com.abce.sge.entity.Produto;
+import br.com.abce.sge.entity.ProdutoEntity;
 
 import java.util.List;
 
 public interface ProdutoRepository {
     
 
-    Produto buscar(final Long idProduto);
+    ProdutoEntity buscar(final Long idProduto);
 
-    void salvar(final Produto produto);
+    void salvar(final ProdutoEntity produto);
 
-    void remover(final Produto produto);
+    void remover(final ProdutoEntity produto);
 
-    List<Produto> listar();
+    List<ProdutoEntity> listar();
 }
