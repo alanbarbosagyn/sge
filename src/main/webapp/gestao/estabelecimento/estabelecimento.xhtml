@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="form">
+
+        <p:growl autoUpdate="true" id="messages" showDetail="true" />
+        <p:panel id="estabelecimento">
+            <h:panelGrid>
+
+                <p:outputLabel for="id" value="Id: "/>
+                <p:inputText id="id" value="#{estabelecimentoBean.estabelecimento.id}" maxlength="10"/>
+                <p:outputLabel for="nome" value="Nome: "/>
+                <p:inputText id="nome" value="#{estabelecimentoBean.estabelecimento.nome}" maxlength="100"/>
+                <p:outputLabel for="cidade" value="Cidade: "/>
+                <p:inputText type="cidade" id="cidade" value="#{estabelecimentoBean.estabelecimento.cidade}" maxlength="50"/>
+                <p:outputLabel for="endereco" value="Endereco: "/>
+                <p:inputText id="endereco" value="#{estabelecimentoBean.estabelecimento.endereco}" maxlength="50"/>
+                <p:outputLabel for="uf" value="UF: "/>
+                <p:inputText id="uf" value="#{estabelecimentoBean.estabelecimento.uf}" maxlength="2"/>
+
+                <h:panelGrid columns="3">
+                    <p:commandButton id="salvar" update=":form:estabelecimento"
+                                     value="Salvar" action="#{estabelecimentoBean.salvar()}"/>
+                    <p:commandButton id="limpar" update=":form:estabelecimento"
+                                     value="Limpar" action="#{estabelecimentoBean.limpar()}"/>
+                    <p:commandButton id="buscar" update=":form:lista"
+                                     value="Buscar" action="#{estabelecimentoBean.buscar()}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="lista">
+            <h:panelGrid style="margin-top: 25px;">
+                <p:dataTable var="item" value="#{estabelecimentoBean.listEstabelecimento}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="Id" style="text-align: center">
+                        <h:outputText value="#{item.id}" />
+                    </p:column>
+
+                    <p:column headerText="Cidade" style="text-align: center">
+                        <h:outputText value="#{item.cidade}" />
+                    </p:column>
+
+                    <p:column headerText="Nome" style="text-align: center">
+                        <h:outputText value="#{item.nome}" />
+                    </p:column>
+
+                    <p:column headerText="Endereço" style="text-align: center">
+                        <h:outputText value="#{item.endereco}" />
+                    </p:column>
+
+                    <p:column headerText="UF" style="text-align: center">
+                        <h:outputText value="#{item.uf}" />
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:estabelecimento" icon="pi pi-search" title="Alterar">
+                            <f:setPropertyActionListener value="#{item}" target="#{estabelecimentoBean.estabelecimento}" />
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:lista" icon="pi pi-trash" title="Remover"
+                                         action="#{estabelecimentoBean.remover()}">
+                            <f:setPropertyActionListener value="#{item}" target="#{estabelecimentoBean.estabelecimento}" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

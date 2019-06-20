@@ -1,6 +1,8 @@
 package br.com.abce.sge.resource.impl;
 
 import br.com.abce.sge.dto.ProdutoDto;
+import br.com.abce.sge.exceptions.RecursoNaoEncontradoException;
+import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.resource.ProdutoResource;
 import br.com.abce.sge.resource.config.RestApplication;
 import br.com.abce.sge.servico.ProdutoService;
@@ -14,29 +16,43 @@ public class ProdutoResourceImpl extends RestApplication implements ProdutoResou
     private ProdutoService produtoService;
 
     @Override
-    public List<ProdutoDto> listarProdutos() {
+    public List<ProdutoDto> listarProdutos() throws RecursoNaoEncontradoException {
 
         final List<ProdutoDto> listaProdutoDto = produtoService.listar();
+
+        if (listaProdutoDto.isEmpty())
+
+            throw new RecursoNaoEncontradoException("Produto não cadastrado.");
 
         return listaProdutoDto;
     }
 
-    public ProdutoDto getProduto(final String idProduto){
+    public ProdutoDto getProduto(final Long idProduto) throws ValidacaoException, RecursoNaoEncontradoException {
 
-        final ProdutoDto produtoDto = produtoService.buscar(Long.valueOf(idProduto));
+        final ProdutoDto produtoDto = produtoService.buscar(idProduto);
+
+        if (produtoDto == null)
+
+            throw new RecursoNaoEncontradoException("Produto não cadastrado.");
 
         return produtoDto;
     }
 
     @Override
-    public void removeProduto(String idProduto) {
+    public void removeProduto(final Long idProduto) throws ValidacaoException, RecursoNaoEncontradoException {
 
-        produtoService.remover(Long.valueOf(idProduto));
+        ProdutoDto produtoDto = produtoService.buscar(idProduto);
+
+        if (produtoDto == null)
+
+            throw new RecursoNaoEncontradoException("Produto não cadastrado.");
+
+        produtoService.remover(produtoDto);
 
     }
 
     @Override
-    public void inserirProduto(ProdutoDto produtoDto) {
+    public void inserirProduto(ProdutoDto produtoDto) throws ValidacaoException {
 
         produtoService.cadastrar(produtoDto);
     }

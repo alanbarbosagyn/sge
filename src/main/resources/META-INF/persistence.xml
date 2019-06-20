@@ -11,8 +11,6 @@
         <!-- glassfish datasource -->
 <!--        <jta-data-source>jdbc/${db.name}</jta-data-source>-->
 
-
-        <class>br.com.abce.sge.entity.Produto</class>
         <class>br.com.abce.sge.entity.AvaliacaoEntity</class>
         <class>br.com.abce.sge.entity.AvaliacaoItemEntity</class>
         <class>br.com.abce.sge.entity.AvaliacaoMotivoEntity</class>
@@ -40,7 +38,7 @@
 <!--            <property name="javax.persistence.jdbc.password" value="mysql" />-->
 <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />-->
 
-            <property name="hibernate.connection.shutdown" value="true" />
+<!--            <property name="hibernate.connection.shutdown" value="true" />-->
 <!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true"/>

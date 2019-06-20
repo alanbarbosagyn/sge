@@ -2,12 +2,12 @@ package br.com.abce.sge.servico.impl;
 
 import br.com.abce.sge.dto.ProdutoDto;
 import br.com.abce.sge.entity.ProdutoEntity;
+import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.repository.ProdutoRepository;
 import br.com.abce.sge.servico.ProdutoService;
-import com.sun.jersey.api.NotFoundException;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.ejb.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,26 +40,42 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public ProdutoDto buscar(Long idProduto) {
+    public ProdutoDto buscar(Long idProduto) throws ValidacaoException {
+
+        if (idProduto == null || idProduto == 0L)
+
+            throw new ValidacaoException("Id do Produto não informado.");
+
+        ProdutoDto produtoDto = null;
 
         ProdutoEntity produto = produtoRepository.buscar(idProduto);
 
-        if (produto == null)
+        if (produto != null) {
 
-            throw new NotFoundException("Produto não cadastrado.");
-
-        ProdutoDto produtoDto = new ProdutoDto();
-        produtoDto.setDescricao(produto.getDetalhe());
-        produtoDto.setId(produto.getId());
-        produtoDto.setNome(produto.getNome());
-        produtoDto.setValor(produto.getValor());
+            produtoDto = new ProdutoDto();
+            produtoDto.setDescricao(produto.getDetalhe());
+            produtoDto.setId(produto.getId());
+            produtoDto.setNome(produto.getNome());
+            produtoDto.setValor(produto.getValor());
+        }
 
         return produtoDto;
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void cadastrar(ProdutoDto produtoDto) {
+    public void cadastrar(ProdutoDto produtoDto) throws ValidacaoException {
+
+
+
+        if (StringUtils.isBlank(produtoDto.getDescricao()))
+            throw new ValidacaoException("Descrição do produto obrigatório.");
+
+        if (StringUtils.isBlank(produtoDto.getNome()))
+            throw new ValidacaoException("Nome do produto obrigatório.");
+
+        if (produtoDto.getValor() == null || produtoDto.getValor().intValue() == 0)
+            throw new ValidacaoException("Valor do produto obrigatório.");
 
 
         ProdutoEntity produto = new ProdutoEntity();
@@ -74,15 +90,12 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void remover(Long idProduto) {
+    public void remover(ProdutoDto produtoDto) throws ValidacaoException {
 
-        ProdutoEntity produto = produtoRepository.buscar(idProduto);
+        if (produtoDto == null)
+            throw new ValidacaoException("Produto não informado.");
 
-        if (produto == null)
-
-            throw new NotFoundException("Produto não cadastrado.");
-
-        produtoRepository.remover(produto);
+        produtoRepository.remover(produtoDto.getId());
 
     }
 }

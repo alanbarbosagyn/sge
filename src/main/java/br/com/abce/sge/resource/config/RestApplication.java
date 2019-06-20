@@ -1,5 +1,8 @@
 package br.com.abce.sge.resource.config;
 
+import br.com.abce.sge.exceptions.InfraestruturaException;
+import br.com.abce.sge.exceptions.RecursoNaoEncontradoException;
+import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.resource.impl.ProdutoResourceImpl;
 import io.swagger.jaxrs.config.BeanConfig;
 
@@ -31,6 +34,10 @@ public class RestApplication extends Application {
         // Swagger API documentation
         resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
         resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+
+        resources.add(ValidacaoException.class);
+        resources.add(RecursoNaoEncontradoException.class);
+        resources.add(InfraestruturaException.class);
 
         // Resources REST
         resources.add(ProdutoResourceImpl.class);

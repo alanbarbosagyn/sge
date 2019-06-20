@@ -4,11 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class GenericRepository {
+public class SgeManageFactory {
 
     private static EntityManagerFactory entityManagerFactory;
 
-    public GenericRepository() {
+    public SgeManageFactory() {
 
         if (entityManagerFactory == null)
             entityManagerFactory = Persistence.createEntityManagerFactory("sge");
