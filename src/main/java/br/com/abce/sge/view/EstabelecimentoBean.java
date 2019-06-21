@@ -70,7 +70,7 @@ public class EstabelecimentoBean implements Serializable {
 
             listEstabelecimento.remove(estabelecimento);
 
-            FacesUtil.sendMsg("Cadastro Estabelecimento: ", "Estabelecimentos removido com sucesso!", FacesMessage.SEVERITY_INFO);
+            FacesUtil.sendMsg("Cadastro Estabelecimento: ", "Estabelecimento removido com sucesso!", FacesMessage.SEVERITY_INFO);
 
         } catch (ValidacaoException ex) {
             FacesUtil.sendMsg("Cadastro Estabelecimento: ", ex.getMessage(), FacesMessage.SEVERITY_WARN);

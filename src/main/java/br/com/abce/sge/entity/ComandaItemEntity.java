@@ -2,60 +2,37 @@ package br.com.abce.sge.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "comanda_item", schema = "public", catalog = "sge")
 public class ComandaItemEntity {
-    private long id;
-    private long comandaId;
-    private long produtoId;
-    private long usuarioId;
+    private Long id;
     private BigDecimal valor;
-    private Short cancelado;
+    private Integer situacao;
+    private Date dataHoraSolicitacao;
+    private Date dataHoraEntregra;
+    private Collection<AvaliacaoItemEntity> avaliacaoItemsById;
+    private ComandaEntity comandaByComandaId;
+    private ProdutoEntity produtoByProdutoId;
+    private UsuarioEntity usuarioByUsuarioId;
 
     @Id
-    @Column(name = "id")
-    public long getId() {
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comandaItemSeq")
+    @SequenceGenerator(sequenceName = "comanda_item_seq", name = "comandaItemSeq", schema = "public", catalog = "sge", allocationSize = 1)
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "comanda_id")
-    public long getComandaId() {
-        return comandaId;
-    }
-
-    public void setComandaId(long comandaId) {
-        this.comandaId = comandaId;
-    }
-
-    @Basic
-    @Column(name = "produto_id")
-    public long getProdutoId() {
-        return produtoId;
-    }
-
-    public void setProdutoId(long produtoId) {
-        this.produtoId = produtoId;
-    }
-
-    @Basic
-    @Column(name = "usuario_id")
-    public long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    @Basic
-    @Column(name = "valor")
+    @Column(name = "valor", nullable = true, precision = 2)
     public BigDecimal getValor() {
         return valor;
     }
@@ -65,13 +42,33 @@ public class ComandaItemEntity {
     }
 
     @Basic
-    @Column(name = "cancelado")
-    public Short getCancelado() {
-        return cancelado;
+    @Column(name = "situacao", nullable = false)
+    public Integer getSituacao() {
+        return situacao;
     }
 
-    public void setCancelado(Short cancelado) {
-        this.cancelado = cancelado;
+    public void setSituacao(Integer situacao) {
+        this.situacao = situacao;
+    }
+
+    @Basic
+    @Column(name = "data_hora_solicitacao", nullable = false)
+    public Date getDataHoraSolicitacao() {
+        return dataHoraSolicitacao;
+    }
+
+    public void setDataHoraSolicitacao(Date dataHoraSolicitacao) {
+        this.dataHoraSolicitacao = dataHoraSolicitacao;
+    }
+
+    @Basic
+    @Column(name = "data_hora_entregra", nullable = true)
+    public Date getDataHoraEntregra() {
+        return dataHoraEntregra;
+    }
+
+    public void setDataHoraEntregra(Date dataHoraEntregra) {
+        this.dataHoraEntregra = dataHoraEntregra;
     }
 
     @Override
@@ -79,16 +76,54 @@ public class ComandaItemEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComandaItemEntity that = (ComandaItemEntity) o;
-        return id == that.id &&
-                comandaId == that.comandaId &&
-                produtoId == that.produtoId &&
-                usuarioId == that.usuarioId &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(valor, that.valor) &&
-                Objects.equals(cancelado, that.cancelado);
+                Objects.equals(situacao, that.situacao) &&
+                Objects.equals(dataHoraSolicitacao, that.dataHoraSolicitacao) &&
+                Objects.equals(dataHoraEntregra, that.dataHoraEntregra);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, comandaId, produtoId, usuarioId, valor, cancelado);
+        return Objects.hash(id, valor, situacao, dataHoraSolicitacao, dataHoraEntregra);
+    }
+
+    @OneToMany(mappedBy = "comandaItemByComandaItemId")
+    public Collection<AvaliacaoItemEntity> getAvaliacaoItemsById() {
+        return avaliacaoItemsById;
+    }
+
+    public void setAvaliacaoItemsById(Collection<AvaliacaoItemEntity> avaliacaoItemsById) {
+        this.avaliacaoItemsById = avaliacaoItemsById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "comanda_id", referencedColumnName = "id", nullable = false)
+    public ComandaEntity getComandaByComandaId() {
+        return comandaByComandaId;
+    }
+
+    public void setComandaByComandaId(ComandaEntity comandaByComandaId) {
+        this.comandaByComandaId = comandaByComandaId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
+    public ProdutoEntity getProdutoByProdutoId() {
+        return produtoByProdutoId;
+    }
+
+    public void setProdutoByProdutoId(ProdutoEntity produtoByProdutoId) {
+        this.produtoByProdutoId = produtoByProdutoId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+    public UsuarioEntity getUsuarioByUsuarioId() {
+        return usuarioByUsuarioId;
+    }
+
+    public void setUsuarioByUsuarioId(UsuarioEntity usuarioByUsuarioId) {
+        this.usuarioByUsuarioId = usuarioByUsuarioId;
     }
 }

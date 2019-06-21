@@ -11,4 +11,6 @@ public interface EstabelecimentoRepository {
     List<EstabelecimentoEntity> listar();
 
     void remover(final Long idEstabelecimento);
+
+    EstabelecimentoEntity buscar(final Long idEstabelecimento);
 }

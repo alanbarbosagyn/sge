@@ -1,32 +1,33 @@
 package br.com.abce.sge.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class ComandaUsuarioEntityPK implements Serializable {
-    private long comandaId;
-    private long usuarioId;
 
-    @Column(name = "comanda_id")
-    @Id
-    public long getComandaId() {
-        return comandaId;
+    private ComandaEntity comandaByComandaId;
+    private UsuarioEntity usuarioByUsuarioId;
+
+    @ManyToOne
+    @JoinColumn(name = "comanda_id", referencedColumnName = "id", nullable = false)
+    public ComandaEntity getComandaByComandaId() {
+        return comandaByComandaId;
     }
 
-    public void setComandaId(long comandaId) {
-        this.comandaId = comandaId;
+    public void setComandaByComandaId(ComandaEntity comandaByComandaId) {
+        this.comandaByComandaId = comandaByComandaId;
     }
 
-    @Column(name = "usuario_id")
-    @Id
-    public long getUsuarioId() {
-        return usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+    public UsuarioEntity getUsuarioByUsuarioId() {
+        return usuarioByUsuarioId;
     }
 
-    public void setUsuarioId(long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUsuarioByUsuarioId(UsuarioEntity usuarioByUsuarioId) {
+        this.usuarioByUsuarioId = usuarioByUsuarioId;
     }
 
     @Override
@@ -34,12 +35,12 @@ public class ComandaUsuarioEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComandaUsuarioEntityPK that = (ComandaUsuarioEntityPK) o;
-        return comandaId == that.comandaId &&
-                usuarioId == that.usuarioId;
+        return Objects.equals(comandaByComandaId, that.comandaByComandaId) &&
+                Objects.equals(usuarioByUsuarioId, that.usuarioByUsuarioId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(comandaId, usuarioId);
+        return Objects.hash(comandaByComandaId, usuarioByUsuarioId);
     }
 }

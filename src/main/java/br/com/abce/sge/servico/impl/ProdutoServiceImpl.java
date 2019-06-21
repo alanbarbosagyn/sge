@@ -28,7 +28,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         for (ProdutoEntity produto : lista) {
 
             ProdutoDto produtoDto = new ProdutoDto();
-            produtoDto.setDescricao(produto.getDetalhe());
+            produtoDto.setDescricao(produto.getDescricao());
             produtoDto.setId(produto.getId());
             produtoDto.setNome(produto.getNome());
             produtoDto.setValor(produto.getValor());
@@ -53,7 +53,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         if (produto != null) {
 
             produtoDto = new ProdutoDto();
-            produtoDto.setDescricao(produto.getDetalhe());
+            produtoDto.setDescricao(produto.getDescricao());
             produtoDto.setId(produto.getId());
             produtoDto.setNome(produto.getNome());
             produtoDto.setValor(produto.getValor());
@@ -79,7 +79,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 
         ProdutoEntity produto = new ProdutoEntity();
-        produto.setDetalhe(produtoDto.getDescricao());
+        produto.setDescricao(produtoDto.getDescricao());
         produto.setId(produtoDto.getId());
         produto.setNome(produtoDto.getNome());
         produto.setValor(produtoDto.getValor());

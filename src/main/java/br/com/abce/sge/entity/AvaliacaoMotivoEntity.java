@@ -1,27 +1,31 @@
 package br.com.abce.sge.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "avaliacao_motivo", schema = "public", catalog = "sge")
 public class AvaliacaoMotivoEntity {
-    private long id;
+    private Long id;
     private String motivo;
     private String tipo;
+    private Collection<AvaliacaoItemEntity> avaliacaoItemsById;
 
     @Id
-    @Column(name = "id")
-    public long getId() {
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avaliacaoMotivoSeq")
+    @SequenceGenerator(sequenceName = "avaliacao_motivo_seq", name = "avaliacaoMotivoSeq", schema = "public", catalog = "sge", allocationSize = 1)
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "motivo")
+    @Column(name = "motivo", nullable = true, length = 100)
     public String getMotivo() {
         return motivo;
     }
@@ -31,7 +35,7 @@ public class AvaliacaoMotivoEntity {
     }
 
     @Basic
-    @Column(name = "tipo")
+    @Column(name = "tipo", nullable = true, length = 10)
     public String getTipo() {
         return tipo;
     }
@@ -45,7 +49,7 @@ public class AvaliacaoMotivoEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AvaliacaoMotivoEntity that = (AvaliacaoMotivoEntity) o;
-        return id == that.id &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(motivo, that.motivo) &&
                 Objects.equals(tipo, that.tipo);
     }
@@ -53,5 +57,14 @@ public class AvaliacaoMotivoEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, motivo, tipo);
+    }
+
+    @OneToMany(mappedBy = "avaliacaoMotivoByAvaliacaoMotivoId")
+    public Collection<AvaliacaoItemEntity> getAvaliacaoItemsById() {
+        return avaliacaoItemsById;
+    }
+
+    public void setAvaliacaoItemsById(Collection<AvaliacaoItemEntity> avaliacaoItemsById) {
+        this.avaliacaoItemsById = avaliacaoItemsById;
     }
 }

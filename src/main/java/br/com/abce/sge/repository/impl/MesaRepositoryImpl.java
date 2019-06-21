@@ -18,7 +18,7 @@ public class MesaRepositoryImpl extends GenericRepository<MesaEntity> implements
     @Override
     public List<MesaEntity> listar(Long idEstabelecimento) {
         return getEntityManager()
-                .createQuery("from MesaEntity where estabelecimentoId = :idEstabelecimento")
+                .createQuery("from MesaEntity where estabelecimentoByEstabelecimentoId.id = :idEstabelecimento")
                 .setParameter("idEstabelecimento", idEstabelecimento)
                 .getResultList();
     }

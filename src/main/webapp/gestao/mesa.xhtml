@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="form">
+
+        <p:growl autoUpdate="true" id="messages" showDetail="true" />
+        <p:panel id="mesa">
+            <h:panelGrid>
+                <p:outputLabel for="estabelecimento" value="Estabecimento: "/>
+                <p:selectOneMenu id="estabelecimento" value="#{mesaBean.mesa.idEstabelecimento}"
+                                 style="width:125px">
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItems value="#{mesaBean.listaEstabelecimentos}" var="item"
+                                   itemValue="#{item.id}" itemLabel="#{item.nome}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="capacidade" value="Capacidade: "/>
+                <p:inputText id="capacidade" value="#{mesaBean.mesa.capacidade}" maxlength="2">
+                    <f:converter converterId="javax.faces.Integer" for="numero"></f:converter>
+                </p:inputText>
+                <p:outputLabel for="numero" value="Número: "/>
+                <p:inputText type="numero" id="numero" value="#{mesaBean.mesa.numero}" maxlength="10">
+                    <f:converter converterId="javax.faces.Long" for="numero"></f:converter>
+                </p:inputText>
+
+                <h:panelGrid columns="3">
+                    <p:commandButton id="salvar" update=":form:mesa :form:messages"
+                                     value="Salvar" action="#{mesaBean.salvar()}"/>
+                    <p:commandButton id="limpar" update=":form:mesa :form:messages"
+                                     value="Limpar" action="#{mesaBean.limpar()}"/>
+                    <p:commandButton id="buscar" update=":form:lista :form:messages"
+                                     value="Buscar" action="#{mesaBean.buscar()}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="lista">
+            <h:panelGrid style="margin-top: 25px;">
+                <p:dataTable var="mesa" value="#{mesaBean.listaMesa}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="Id" style="text-align: center">
+                        <h:outputText value="#{mesa.id}" />
+                    </p:column>
+
+                    <p:column headerText="Capacidade" style="text-align: center">
+                        <h:outputText value="#{mesa.capacidade}" />
+                    </p:column>
+
+                    <p:column headerText="Número" style="text-align: center">
+                        <h:outputText value="#{mesa.numero}" />
+                    </p:column>
+
+                    <p:column headerText="Identificador" style="text-align: center">
+                        <h:outputText value="#{mesa.identificadorQrCode}" />
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:mesa :form:messages" icon="pi pi-search" title="Alterar">
+                            <f:setPropertyActionListener value="#{mesa}" target="#{mesaBean.mesa}" />
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:lista :form:messages" icon="pi pi-trash" title="Remover"
+                                         action="#{mesaBean.remover()}">
+                            <f:setPropertyActionListener value="#{mesa}" target="#{mesaBean.mesa}" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

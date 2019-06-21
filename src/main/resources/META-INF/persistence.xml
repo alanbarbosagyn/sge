@@ -11,7 +11,6 @@
         <!-- glassfish datasource -->
 <!--        <jta-data-source>jdbc/${db.name}</jta-data-source>-->
 
-        <class>br.com.abce.sge.entity.AvaliacaoEntity</class>
         <class>br.com.abce.sge.entity.AvaliacaoItemEntity</class>
         <class>br.com.abce.sge.entity.AvaliacaoMotivoEntity</class>
         <class>br.com.abce.sge.entity.ComandaEntity</class>
@@ -23,7 +22,8 @@
         <class>br.com.abce.sge.entity.ProdutoEntity</class>
         <class>br.com.abce.sge.entity.ProdutoFotoEntity</class>
         <class>br.com.abce.sge.entity.UsuarioEntity</class>
-        <class>br.com.abce.sge.entity.ComandaSolicitacaoEntity</class>
+        <class>br.com.abce.sge.entity.EnderecoEntity</class>
+        <class>br.com.abce.sge.entity.SolicitacaoEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

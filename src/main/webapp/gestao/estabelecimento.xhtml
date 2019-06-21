@@ -11,24 +11,33 @@
         <p:growl autoUpdate="true" id="messages" showDetail="true" />
         <p:panel id="estabelecimento">
             <h:panelGrid>
-
-                <p:outputLabel for="id" value="Id: "/>
-                <p:inputText id="id" value="#{estabelecimentoBean.estabelecimento.id}" maxlength="10"/>
                 <p:outputLabel for="nome" value="Nome: "/>
                 <p:inputText id="nome" value="#{estabelecimentoBean.estabelecimento.nome}" maxlength="100"/>
+                <p:outputLabel for="cnpj" value="CNPJ: "/>
+                <p:inputMask id="cnpj" value="#{estabelecimentoBean.estabelecimento.cnpj}" maxlength="18" mask="99.999.999/9999-99"/>
+                <p:outputLabel for="logradouro" value="Logradouro: "/>
+                <p:inputText id="logradouro" value="#{estabelecimentoBean.estabelecimento.logradouro}" maxlength="100"/>
+                <p:outputLabel for="complemento" value="Complemento: "/>
+                <p:inputText type="complemento" id="complemento" value="#{estabelecimentoBean.estabelecimento.complemento}" maxlength="100"/>
+                <p:outputLabel for="bairro" value="Bairro: "/>
+                <p:inputText type="bairro" id="bairro" value="#{estabelecimentoBean.estabelecimento.bairro}" maxlength="50"/>
+                <p:outputLabel for="numero" value="Número: "/>
+                <p:inputText type="numero" id="numero" value="#{estabelecimentoBean.estabelecimento.numero}" maxlength="10">
+                    <f:converter converterId="javax.faces.Integer" for="numero"></f:converter>
+                </p:inputText>
+                <p:outputLabel for="cep" value="CEP: "/>
+                <p:inputMask type="cep" id="cep" value="#{estabelecimentoBean.estabelecimento.cep}" maxlength="10" mask="99.999-999"/>
                 <p:outputLabel for="cidade" value="Cidade: "/>
-                <p:inputText type="cidade" id="cidade" value="#{estabelecimentoBean.estabelecimento.cidade}" maxlength="50"/>
-                <p:outputLabel for="endereco" value="Endereco: "/>
-                <p:inputText id="endereco" value="#{estabelecimentoBean.estabelecimento.endereco}" maxlength="50"/>
+                <p:inputText type="cidade" id="cidade" value="#{estabelecimentoBean.estabelecimento.cidade}" maxlength="80"/>
                 <p:outputLabel for="uf" value="UF: "/>
                 <p:inputText id="uf" value="#{estabelecimentoBean.estabelecimento.uf}" maxlength="2"/>
 
                 <h:panelGrid columns="3">
-                    <p:commandButton id="salvar" update=":form:estabelecimento"
+                    <p:commandButton id="salvar" update=":form:estabelecimento :form:messages"
                                      value="Salvar" action="#{estabelecimentoBean.salvar()}"/>
-                    <p:commandButton id="limpar" update=":form:estabelecimento"
+                    <p:commandButton id="limpar" update=":form:estabelecimento :form:messages"
                                      value="Limpar" action="#{estabelecimentoBean.limpar()}"/>
-                    <p:commandButton id="buscar" update=":form:lista"
+                    <p:commandButton id="buscar" update=":form:lista :form:messages"
                                      value="Buscar" action="#{estabelecimentoBean.buscar()}"/>
                 </h:panelGrid>
             </h:panelGrid>
@@ -44,6 +53,10 @@
                         <h:outputText value="#{item.id}" />
                     </p:column>
 
+                    <p:column headerText="CNPJ" style="text-align: center">
+                        <h:outputText value="#{item.cnpj}" />
+                    </p:column>
+
                     <p:column headerText="Cidade" style="text-align: center">
                         <h:outputText value="#{item.cidade}" />
                     </p:column>
@@ -53,7 +66,7 @@
                     </p:column>
 
                     <p:column headerText="Endereço" style="text-align: center">
-                        <h:outputText value="#{item.endereco}" />
+                        <h:outputText value="#{item.logradouro}" />
                     </p:column>
 
                     <p:column headerText="UF" style="text-align: center">
@@ -61,13 +74,13 @@
                     </p:column>
 
                     <p:column style="width:32px;text-align: center">
-                        <p:commandButton update=":form:estabelecimento" icon="pi pi-search" title="Alterar">
+                        <p:commandButton update=":form:estabelecimento :form:messages" icon="pi pi-search" title="Alterar">
                             <f:setPropertyActionListener value="#{item}" target="#{estabelecimentoBean.estabelecimento}" />
                         </p:commandButton>
                     </p:column>
 
                     <p:column style="width:32px;text-align: center">
-                        <p:commandButton update=":form:lista" icon="pi pi-trash" title="Remover"
+                        <p:commandButton update=":form:lista :form:messages" icon="pi pi-trash" title="Remover"
                                          action="#{estabelecimentoBean.remover()}">
                             <f:setPropertyActionListener value="#{item}" target="#{estabelecimentoBean.estabelecimento}" />
                         </p:commandButton>
