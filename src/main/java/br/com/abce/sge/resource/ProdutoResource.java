@@ -24,6 +24,11 @@ public interface ProdutoResource extends HTTPCodeRestDefinition {
     List<ProdutoDto> listarProdutos() throws RecursoNaoEncontradoException;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Listar produtos do estabelecimento", tags = "Listar produtos cadastrados no estabelecimento.")
+    List<ProdutoDto> listarProdutos(@QueryParam("idEstabelecimento") final Long idEstabelecimento) throws RecursoNaoEncontradoException, ValidacaoException;
+
+    @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Consulta de produto", tags = "Consulta de produto pelo seu ID.")

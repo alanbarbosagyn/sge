@@ -16,6 +16,10 @@ public class ProdutoDto implements Serializable {
     private String nome;
     @FormParam("valor")
     private Double valor;
+    @FormParam("observacao")
+    private String observacao;
+    @FormParam("idEstabelecimento")
+    private Long idEstabelecimento;
 
     public ProdutoDto() {
         super();
@@ -51,5 +55,21 @@ public class ProdutoDto implements Serializable {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Long getIdEstabelecimento() {
+        return idEstabelecimento;
+    }
+
+    public void setIdEstabelecimento(Long idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="form">
+
+        <p:growl autoUpdate="true" id="messages" showDetail="true" />
+        <p:panel id="produto">
+            <h:panelGrid>
+                <p:outputLabel for="estabelecimento" value="Estabecimento: "/>
+                <p:selectOneMenu id="estabelecimento" value="#{produtoBean.produto.idEstabelecimento}"
+                                 style="width:125px">
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItems value="#{produtoBean.listaEstabelecimentos}" var="item"
+                                   itemValue="#{item.id}" itemLabel="#{item.nome}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="nome" value="Nome: "/>
+                <p:inputText id="nome" value="#{produtoBean.produto.nome}" maxlength="45"/>
+                <p:outputLabel for="descricao" value="Descrição: "/>
+                <p:inputText id="descricao" value="#{produtoBean.produto.descricao}" maxlength="100"/>
+                <p:outputLabel for="valor" value="Valor R$: "/>
+                <p:inputNumber id="valor" value="#{produtoBean.produto.valor}" symbol="R$" thousandSeparator="."
+                               decimalSeparator="," maxlength="10" minValue="0.00">
+                </p:inputNumber>
+                <p:outputLabel for="observacao" value="Observação: "/>
+                <p:inputTextarea id="observacao" value="#{produtoBean.produto.observacao}"
+                                 rows="5" cols="20" maxlength="300"/>
+
+                <h:panelGrid columns="3">
+                    <p:commandButton id="salvar" update=":form:produto :form:messages"
+                                     value="Salvar" action="#{produtoBean.salvar()}"/>
+                    <p:commandButton id="limpar" update=":form:produto :form:messages"
+                                     value="Limpar" action="#{produtoBean.limpar()}"/>
+                    <p:commandButton id="buscar" update=":form:lista :form:messages"
+                                     value="Buscar" action="#{produtoBean.buscar()}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="lista">
+            <h:panelGrid style="margin-top: 25px;">
+                <p:dataTable var="produto" value="#{produtoBean.listaProduto}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="Id" style="text-align: center">
+                        <h:outputText value="#{produto.id}" />
+                    </p:column>
+
+                    <p:column headerText="Nome" style="text-align: center">
+                        <h:outputText value="#{produto.nome}" />
+                    </p:column>
+
+                    <p:column headerText="Descrição" style="text-align: center">
+                        <h:outputText value="#{produto.descricao}" />
+                    </p:column>
+
+                    <p:column headerText="Valor R$" style="text-align: center">
+                        <h:outputText value="#{produto.valor}" >
+                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" pattern="#0.00"
+                                             currencySymbol="R$" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:produto :form:messages" icon="pi pi-search" title="Alterar">
+                            <f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}" />
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:lista :form:messages" icon="pi pi-trash" title="Remover"
+                                         action="#{produtoBean.remover()}">
+                            <f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

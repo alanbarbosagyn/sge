@@ -13,4 +13,6 @@ public interface ProdutoRepository {
     void remover(final Long idProduto);
 
     List<ProdutoEntity> listar();
+
+    List<ProdutoEntity> listar(final Long idEstabelecimento);
 }

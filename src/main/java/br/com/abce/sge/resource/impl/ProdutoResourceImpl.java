@@ -27,6 +27,18 @@ public class ProdutoResourceImpl extends RestApplication implements ProdutoResou
         return listaProdutoDto;
     }
 
+    @Override
+    public List<ProdutoDto> listarProdutos(Long idEstabelecimento) throws RecursoNaoEncontradoException, ValidacaoException {
+
+        final List<ProdutoDto> listaProdutoDto = produtoService.listar(idEstabelecimento);
+
+        if (listaProdutoDto.isEmpty())
+
+            throw new RecursoNaoEncontradoException("Produto não cadastrado.");
+
+        return listaProdutoDto;
+    }
+
     public ProdutoDto getProduto(final Long idProduto) throws ValidacaoException, RecursoNaoEncontradoException {
 
         final ProdutoDto produtoDto = produtoService.buscar(idProduto);
@@ -54,6 +66,6 @@ public class ProdutoResourceImpl extends RestApplication implements ProdutoResou
     @Override
     public void inserirProduto(ProdutoDto produtoDto) throws ValidacaoException {
 
-        produtoService.cadastrar(produtoDto);
+        produtoService.salvar(produtoDto);
     }
 }
