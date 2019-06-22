@@ -15,10 +15,11 @@ import java.util.List;
 @Path("/v1/mesa")
 @Produces(value = MediaType.APPLICATION_JSON)
 @Api(value = "/v1/mesa", produces = MediaType.APPLICATION_JSON,
-        tags = "Consulta de Mesas de um Estabelecimento")
+        tags = "Serviços de Consulta e Operação de Mesas de um Estabelecimento")
 public interface MesaResource extends HTTPCodeRestDefinition {
 
     @GET
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Listar mesas", tags = "Listar mesas cadastrados.")
     List<MesaDto> listarMesas(@QueryParam(value = "idEstabelecimento") final Long idEstabelecimento) throws RecursoNaoEncontradoException, ValidacaoException;
@@ -30,7 +31,7 @@ public interface MesaResource extends HTTPCodeRestDefinition {
     MesaDto getMesa(@PathParam("id") @ApiParam(value = "O código de identificação do mesa.") final Long idMesa) throws ValidacaoException, RecursoNaoEncontradoException;
 
     @GET
-    @Path("")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Consultar mesa", tags = "Consultar mesa pelo seu identificador (qrcode).")
     MesaDto getMesaPorIdentif(@ApiParam(value = "O identificador da mesa (qrcode)") @QueryParam(value = "identMesa") final String identMesa) throws ValidacaoException, RecursoNaoEncontradoException;

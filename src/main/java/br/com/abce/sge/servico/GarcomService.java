@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface GarcomService {
 
-    void salvar(GarcomDto garcom) throws ValidacaoException;
+    void salvar(final GarcomDto garcom) throws ValidacaoException;
 
-    List<GarcomDto> listar(Long idEstabelecimento) throws ValidacaoException;
+    List<GarcomDto> listar(final Long idEstabelecimento) throws ValidacaoException;
 
-    void remover(GarcomDto garcom) throws ValidacaoException;
+    void remover(final GarcomDto garcom) throws ValidacaoException;
+
+    GarcomDto buscar(final Long idGarcom) throws ValidacaoException;
 }

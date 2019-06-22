@@ -56,6 +56,7 @@ public class MesaServiceImpl implements MesaService {
         final MesaEntity mesaEntity = mesaRepository.buscar(idMesa);
 
         if (mesaEntity != null) {
+
             mesaDto = getMesaDto(mesaEntity);
         }
 
@@ -74,7 +75,9 @@ public class MesaServiceImpl implements MesaService {
         final MesaEntity mesaEntity = mesaRepository.buscar(identMesa);
 
         if (mesaEntity != null) {
+
             mesaDto = getMesaDto(mesaEntity);
+
         }
 
         return mesaDto;

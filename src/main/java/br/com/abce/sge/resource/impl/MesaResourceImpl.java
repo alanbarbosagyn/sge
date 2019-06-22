@@ -40,7 +40,7 @@ public class MesaResourceImpl implements MesaResource {
     }
 
     @Override
-    public MesaDto getMesaPorIdentif(String identMesa) throws ValidacaoException, RecursoNaoEncontradoException {
+    public MesaDto getMesaPorIdentif(final String identMesa) throws ValidacaoException, RecursoNaoEncontradoException {
 
         final MesaDto mesaDto = mesaService.buscarPorIdent(identMesa);
 

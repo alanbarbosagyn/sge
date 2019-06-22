@@ -1,8 +1,10 @@
 package br.com.abce.sge.servico.impl;
 
 import br.com.abce.sge.dto.EstabelecimentoDto;
+import br.com.abce.sge.dto.ProdutoDto;
 import br.com.abce.sge.entity.EnderecoEntity;
 import br.com.abce.sge.entity.EstabelecimentoEntity;
+import br.com.abce.sge.exceptions.RecursoNaoEncontradoException;
 import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.repository.EstabelecimentoRepository;
 import br.com.abce.sge.servico.EstabelecimentoService;
@@ -87,17 +89,7 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 
         for (EstabelecimentoEntity entity: lista) {
 
-            EstabelecimentoDto estabelecimento = new EstabelecimentoDto();
-            estabelecimento.setId(entity.getId());
-            estabelecimento.setNome(entity.getNome());
-            estabelecimento.setUf(entity.getEnderecoByEnderecoId().getUf());
-            estabelecimento.setCidade(entity.getEnderecoByEnderecoId().getCidade());
-            estabelecimento.setLogradouro(entity.getEnderecoByEnderecoId().getLogradouro());
-            estabelecimento.setBairro(entity.getEnderecoByEnderecoId().getBairro());
-            estabelecimento.setNumero(entity.getEnderecoByEnderecoId().getNumero());
-            estabelecimento.setComplemento(entity.getEnderecoByEnderecoId().getComplemento());
-            estabelecimento.setCnpj(entity.getCnpj());
-            estabelecimento.setCep(entity.getEnderecoByEnderecoId().getCep());
+            EstabelecimentoDto estabelecimento = getEstabelecimentoDto(entity);
 
             estabelecimentoDtoList.add(estabelecimento);
         }
@@ -114,5 +106,42 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
             throw new ValidacaoException("Estabelecimento não informado.");
 
         repository.remover(estabelecimento.getId());
+    }
+
+    @Override
+    public EstabelecimentoDto buscar(final Long idEstabelecimento) throws ValidacaoException {
+
+        if (idEstabelecimento == null || idEstabelecimento == 0L)
+
+            throw new ValidacaoException("Id do Estabelecimento não informado.");
+
+        EstabelecimentoDto estabelecimento = null;
+
+        EstabelecimentoEntity entity = repository.buscar(idEstabelecimento);
+
+        if (entity != null) {
+
+            estabelecimento = getEstabelecimentoDto(entity);
+        }
+
+        return estabelecimento;
+    }
+
+    private EstabelecimentoDto getEstabelecimentoDto(EstabelecimentoEntity entity) {
+
+        EstabelecimentoDto estabelecimento;
+        estabelecimento = new EstabelecimentoDto();
+        estabelecimento.setId(entity.getId());
+        estabelecimento.setNome(entity.getNome());
+        estabelecimento.setUf(entity.getEnderecoByEnderecoId().getUf());
+        estabelecimento.setCidade(entity.getEnderecoByEnderecoId().getCidade());
+        estabelecimento.setLogradouro(entity.getEnderecoByEnderecoId().getLogradouro());
+        estabelecimento.setBairro(entity.getEnderecoByEnderecoId().getBairro());
+        estabelecimento.setNumero(entity.getEnderecoByEnderecoId().getNumero());
+        estabelecimento.setComplemento(entity.getEnderecoByEnderecoId().getComplemento());
+        estabelecimento.setCnpj(entity.getCnpj());
+        estabelecimento.setCep(entity.getEnderecoByEnderecoId().getCep());
+
+        return estabelecimento;
     }
 }

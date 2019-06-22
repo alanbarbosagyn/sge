@@ -73,14 +73,7 @@ public class GarcomServiceImpl implements GarcomService {
 
         for (GarcomEntity entity : listaEntity) {
 
-            GarcomDto garcomDto = new GarcomDto();
-
-            EstabelecimentoEntity estabelecimento = entity.getEstabelecimentoByEstabelecimentoId();
-            garcomDto.setEstabelecimento(estabelecimento.getNome());
-            garcomDto.setIdEstabelecimento(estabelecimento.getId());
-            garcomDto.setNome(entity.getUsuarioByUsuarioId().getNome());
-            garcomDto.setIdUsuario(entity.getUsuarioByUsuarioId().getId());
-            garcomDto.setId(entity.getId());
+            GarcomDto garcomDto = getGarcomDto(entity);
 
             listaGarcom.add(garcomDto);
         }
@@ -90,12 +83,44 @@ public class GarcomServiceImpl implements GarcomService {
     }
 
     @Override
-    public void remover(GarcomDto garcom) throws ValidacaoException {
+    public void remover(final GarcomDto garcom) throws ValidacaoException {
 
         if (garcom == null)
             throw new ValidacaoException("Garcom não informado.");
 
         garcomRepository.remover(garcom.getId());
 
+    }
+
+    @Override
+    public GarcomDto buscar(final Long idGarcom) throws ValidacaoException {
+
+        GarcomDto garcomDto = null;
+
+        if (idGarcom == null)
+
+            throw new ValidacaoException("ID do garcom não informado.");
+
+        final GarcomEntity entity = garcomRepository.buscar(idGarcom);
+
+        if (entity != null)
+
+            garcomDto = getGarcomDto(entity);
+
+        return garcomDto;
+    }
+
+    private GarcomDto getGarcomDto(GarcomEntity entity) {
+
+        GarcomDto garcomDto = new GarcomDto();
+
+        EstabelecimentoEntity estabelecimento = entity.getEstabelecimentoByEstabelecimentoId();
+        garcomDto.setEstabelecimento(estabelecimento.getNome());
+        garcomDto.setIdEstabelecimento(estabelecimento.getId());
+        garcomDto.setNome(entity.getUsuarioByUsuarioId().getNome());
+        garcomDto.setIdUsuario(entity.getUsuarioByUsuarioId().getId());
+        garcomDto.setId(entity.getId());
+
+        return garcomDto;
     }
 }

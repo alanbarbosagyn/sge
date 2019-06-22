@@ -12,4 +12,6 @@ public interface UsuarioService {
     List<UsuarioDto> listar();
 
     void remover(UsuarioDto usuario) throws ValidacaoException;
+
+    UsuarioDto buscar( final Long idUsuario) throws ValidacaoException;
 }

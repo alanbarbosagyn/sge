@@ -11,4 +11,6 @@ public interface GarcomRepository {
     List<GarcomEntity> listar(Long idEstabelecimento);
 
     void remover(Long id);
+
+    GarcomEntity buscar(final Long idGarcom);
 }

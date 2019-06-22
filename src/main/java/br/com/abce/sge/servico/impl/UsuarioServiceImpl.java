@@ -1,6 +1,8 @@
 package br.com.abce.sge.servico.impl;
 
+import br.com.abce.sge.dto.ProdutoDto;
 import br.com.abce.sge.dto.UsuarioDto;
+import br.com.abce.sge.entity.ProdutoEntity;
 import br.com.abce.sge.entity.UsuarioEntity;
 import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.repository.UsuarioRepository;
@@ -80,5 +82,30 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new ValidacaoException("Usuário não informado.");
 
         repository.remover(usuario.getId());
+    }
+
+    @Override
+    public UsuarioDto buscar(final Long idUsuario) throws ValidacaoException {
+
+        if (idUsuario == null || idUsuario == 0L)
+
+            throw new ValidacaoException("Id do Usuário não informado.");
+
+        UsuarioDto usuarioDto = null;
+
+        final UsuarioEntity entity = repository.buscar(idUsuario);
+
+        if (entity != null) {
+
+            usuarioDto = new UsuarioDto();
+            usuarioDto.setEmail(entity.getEmail());
+            usuarioDto.setId(entity.getId());
+            usuarioDto.setNome(entity.getNome());
+            usuarioDto.setSenha(entity.getSenha());
+            usuarioDto.setTelefone(entity.getTelefone());
+            usuarioDto.setUsuario(entity.getUsuario());
+        }
+
+        return usuarioDto;
     }
 }

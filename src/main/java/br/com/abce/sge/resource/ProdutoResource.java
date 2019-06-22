@@ -15,15 +15,17 @@ import java.util.List;
 @Path("/v1/produto")
 @Produces(value = MediaType.APPLICATION_JSON)
 @Api(value = "/v1/produto", produces = MediaType.APPLICATION_JSON,
-        tags = "Cadastro de Produtos")
+        tags = "Serviços de Consulta e Operação de Produtos")
 public interface ProdutoResource extends HTTPCodeRestDefinition {
 
     @GET
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Listar produtos", tags = "Listar produtos cadastrados.")
     List<ProdutoDto> listarProdutos() throws RecursoNaoEncontradoException;
 
     @GET
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Listar produtos do estabelecimento", tags = "Listar produtos cadastrados no estabelecimento.")
     List<ProdutoDto> listarProdutos(@QueryParam("idEstabelecimento") final Long idEstabelecimento) throws RecursoNaoEncontradoException, ValidacaoException;

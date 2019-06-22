@@ -30,6 +30,11 @@
                 <p:inputTextarea id="observacao" value="#{produtoBean.produto.observacao}"
                                  rows="5" cols="20" maxlength="300"/>
 
+                <p:fileUpload fileUploadListener="#{produtoBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                              auto="true" sequential="true"
+                              multiple="true" update="messages" sizeLimit="500000" fileLimit="10" allowTypes="/(\.|\/)(jpe?g|png)$/" />
+
+
                 <h:panelGrid columns="3">
                     <p:commandButton id="salvar" update=":form:produto :form:messages"
                                      value="Salvar" action="#{produtoBean.salvar()}"/>

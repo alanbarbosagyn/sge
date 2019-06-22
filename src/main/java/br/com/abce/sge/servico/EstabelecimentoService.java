@@ -12,4 +12,6 @@ public interface EstabelecimentoService {
     List<EstabelecimentoDto> listar();
 
     void remover(EstabelecimentoDto estabelecimento) throws ValidacaoException;
+
+    EstabelecimentoDto buscar(Long idEstabelecimento) throws ValidacaoException;
 }

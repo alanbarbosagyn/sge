@@ -7,6 +7,7 @@ import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.servico.EstabelecimentoService;
 import br.com.abce.sge.servico.ProdutoService;
 import br.com.abce.sge.util.FacesUtil;
+import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,6 +26,8 @@ public class ProdutoBean implements Serializable {
     private List<ProdutoDto> listaProduto;
 
     private List<EstabelecimentoDto> listaEstabelecimentos;
+
+    private UploadedFile file;
 
     @EJB
     private ProdutoService produtoService;
@@ -116,5 +119,13 @@ public class ProdutoBean implements Serializable {
 
     public void setListaEstabelecimentos(List<EstabelecimentoDto> listaEstabelecimentos) {
         this.listaEstabelecimentos = listaEstabelecimentos;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
 }
