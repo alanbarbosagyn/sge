@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="form">
+
+        <p:growl autoUpdate="true" id="messages" showDetail="true" />
+        <p:panel id="garcom">
+            <h:panelGrid>
+                <p:outputLabel for="estabelecimento" value="Estabecimento: "/>
+                <p:selectOneMenu id="estabelecimento" value="#{garcomBean.garcom.idEstabelecimento}"
+                                 style="width:125px">
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItems value="#{garcomBean.listaEstabelecimento}" var="item"
+                                   itemValue="#{item.id}" itemLabel="#{item.nome}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="usuario" value="Usuário: "/>
+                <p:selectOneMenu id="usuario" value="#{garcomBean.garcom.idUsuario}"
+                                 style="width:125px">
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItems value="#{garcomBean.listaUsuario}" var="item"
+                                   itemValue="#{item.id}" itemLabel="#{item.nome}"/>
+                </p:selectOneMenu>
+
+                <h:panelGrid columns="3">
+                    <p:commandButton id="salvar" update=":form:garcom :form:messages"
+                                     value="Salvar" action="#{garcomBean.salvar()}"/>
+                    <p:commandButton id="limpar" update=":form:garcom :form:messages"
+                                     value="Limpar" action="#{garcomBean.limpar()}"/>
+                    <p:commandButton id="buscar" update=":form:lista :form:messages"
+                                     value="Buscar" action="#{garcomBean.buscar()}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="lista">
+            <h:panelGrid style="margin-top: 25px;">
+                <p:dataTable var="garcom" value="#{garcomBean.listaGarcom}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="Id" style="text-align: center">
+                        <h:outputText value="#{garcom.id}" />
+                    </p:column>
+
+                    <p:column headerText="Nome" style="text-align: center">
+                        <h:outputText value="#{garcom.nome}" />
+                    </p:column>
+
+                    <p:column headerText="Estabelecimento" style="text-align: center">
+                        <h:outputText value="#{garcom.estabelecimento}" />
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:garcom :form:messages" icon="pi pi-search" title="Alterar">
+                            <f:setPropertyActionListener value="#{garcom}" target="#{garcomBean.garcom}" />
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:lista :form:messages" icon="pi pi-trash" title="Remover"
+                                         action="#{garcomBean.remover()}">
+                            <f:setPropertyActionListener value="#{garcom}" target="#{garcomBean.garcom}" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

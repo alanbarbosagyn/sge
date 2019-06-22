@@ -1,6 +1,8 @@
 package br.com.abce.sge.dto;
 
-public class EstabelecimentoDto {
+import java.io.Serializable;
+
+public class EstabelecimentoDto implements Serializable {
 
     private Long id;
     private String nome;

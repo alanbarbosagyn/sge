@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="form">
+
+        <p:growl autoUpdate="true" id="messages" showDetail="true" />
+        <p:panel id="usuario">
+            <h:panelGrid>
+                <p:outputLabel for="nome" value="Nome: "/>
+                <p:inputText id="nome" value="#{usuarioBean.usuario.nome}" maxlength="50"/>
+                <p:outputLabel for="email" value="E-mail: "/>
+                <p:inputText id="email" value="#{usuarioBean.usuario.email}" maxlength="70"/>
+                <p:outputLabel for="telefone" value="Telefone: "/>
+                <p:inputMask type="telefone" id="telefone" value="#{usuarioBean.usuario.telefone}"
+                             mask="99-99999-9999" maxlength="13"/>
+                <p:outputLabel for="user" value="Usuário: "/>
+                <p:inputText type="user" id="user" value="#{usuarioBean.usuario.usuario}" maxlength="20"/>
+                <p:outputLabel for="senha" value="Senha: "
+                               title="Favor informar senha com no mínimo 8 dígitos, entre letras, números e caracters especiais."/>
+                <p:password id="senha" value="#{usuarioBean.usuario.senha}" maxlength="12"
+                             placeholder="Favor informar senha com no mínimo 8 dígitos, entre letras, números e caracters especiais."
+                goodLabel="Favor informar senha com no mínimo 8 dígitos, entre letras, números e caracters especiais."/>
+
+                <h:panelGrid columns="3">
+                    <p:commandButton id="salvar" update=":form:usuario :form:messages"
+                                     value="Salvar" action="#{usuarioBean.salvar()}"/>
+                    <p:commandButton id="limpar" update=":form:usuario :form:messages"
+                                     value="Limpar" action="#{usuarioBean.limpar()}"/>
+                    <p:commandButton id="buscar" update=":form:lista :form:messages"
+                                     value="Buscar" action="#{usuarioBean.buscar()}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="lista">
+            <h:panelGrid style="margin-top: 25px;">
+                <p:dataTable var="item" value="#{usuarioBean.listUsuario}" rows="10" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks}
+                              {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+
+                    <p:column headerText="Id" style="text-align: center">
+                        <h:outputText value="#{item.id}" />
+                    </p:column>
+
+                    <p:column headerText="Usuário" style="text-align: center">
+                        <h:outputText value="#{item.usuario}" />
+                    </p:column>
+
+                    <p:column headerText="Telefone" style="text-align: center">
+                        <h:outputText value="#{item.telefone}"  />
+                    </p:column>
+
+                    <p:column headerText="E-mail" style="text-align: center">
+                        <h:outputText value="#{item.email}" />
+                    </p:column>
+
+                    <p:column headerText="Nome" style="text-align: center">
+                        <h:outputText value="#{item.nome}" />
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:usuario :form:messages" icon="pi pi-search" title="Alterar"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}" />
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:lista :form:messages" icon="pi pi-trash" title="Remover"
+                                         action="#{usuarioBean.remover()}" process="@this">
+                            <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

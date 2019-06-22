@@ -38,6 +38,7 @@ public class ProdutoBean implements Serializable {
 
     @PostConstruct
     public void init(){
+
         listaEstabelecimentos = estabelecimentoService.listar();
         produto = new ProdutoDto();
     }

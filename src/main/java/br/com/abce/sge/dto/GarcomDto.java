@@ -2,16 +2,15 @@ package br.com.abce.sge.dto;
 
 import java.io.Serializable;
 
-public class MesaDto implements Serializable {
+public class GarcomDto implements Serializable {
 
     private Long id;
-    private int numero;
-    private String identificadorQrCode;
-    private Long idEstabelecimento;
+    private String nome;
+    private Long idUsuario;
     private String estabelecimento;
-    private int capacidade;
+    private Long idEstabelecimento;
 
-    public MesaDto() {
+    public GarcomDto() {
         super();
     }
 
@@ -23,20 +22,20 @@ public class MesaDto implements Serializable {
         this.id = id;
     }
 
-    public int getNumero() {
-        return numero;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getIdentificadorQrCode() {
-        return identificadorQrCode;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdentificadorQrCode(String identificadorQrCode) {
-        this.identificadorQrCode = identificadorQrCode;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getEstabelecimento() {
@@ -53,13 +52,5 @@ public class MesaDto implements Serializable {
 
     public void setIdEstabelecimento(Long idEstabelecimento) {
         this.idEstabelecimento = idEstabelecimento;
-    }
-
-    public int getCapacidade() {
-        return capacidade;
-    }
-
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
     }
 }

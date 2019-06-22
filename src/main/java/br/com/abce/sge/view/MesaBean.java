@@ -37,6 +37,7 @@ public class MesaBean implements Serializable {
 
     @PostConstruct
     public void init(){
+
         listaEstabelecimentos = estabelecimentoService.listar();
         mesa = new MesaDto();
     }

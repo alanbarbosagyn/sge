@@ -116,7 +116,7 @@ public class UsuarioEntity {
         this.comandaUsuariosById = comandaUsuariosById;
     }
 
-    @OneToMany(mappedBy = "usuarioByUsuarioId")
+    @OneToMany(mappedBy = "usuarioByUsuarioId", cascade = CascadeType.ALL)
     public Collection<GarcomEntity> getGarcomsById() {
         return garcomsById;
     }

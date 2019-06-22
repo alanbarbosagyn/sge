@@ -30,7 +30,6 @@ public class EstabelecimentoBean implements Serializable {
     }
 
     public EstabelecimentoDto getEstabelecimento() {
-        System.out.println("Passou aqui getEstabelecimento()");
         return estabelecimento;
     }
 
