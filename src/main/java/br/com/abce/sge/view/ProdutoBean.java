@@ -7,18 +7,19 @@ import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.servico.EstabelecimentoService;
 import br.com.abce.sge.servico.ProdutoService;
 import br.com.abce.sge.util.FacesUtil;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class ProdutoBean implements Serializable {
 
     private ProdutoDto produto;
@@ -27,7 +28,9 @@ public class ProdutoBean implements Serializable {
 
     private List<EstabelecimentoDto> listaEstabelecimentos;
 
-    private UploadedFile file;
+    private UploadedFile foto;
+
+//    private List<byte[]> listaFotos;
 
     @EJB
     private ProdutoService produtoService;
@@ -44,6 +47,7 @@ public class ProdutoBean implements Serializable {
 
         listaEstabelecimentos = estabelecimentoService.listar();
         produto = new ProdutoDto();
+//        listaFotos = new ArrayList<>();
     }
 
     public void salvar(){
@@ -93,7 +97,15 @@ public class ProdutoBean implements Serializable {
     public void limpar(){
 
         produto = new ProdutoDto();
+//        listaFotos = new ArrayList<>();
 
+    }
+
+    public void fileUploadAdvanced(FileUploadEvent event){
+
+        UploadedFile uploadedFile = event.getFile();
+
+        produto.getListaFotos().add(uploadedFile.getContents());
     }
 
 
@@ -121,11 +133,19 @@ public class ProdutoBean implements Serializable {
         this.listaEstabelecimentos = listaEstabelecimentos;
     }
 
-    public UploadedFile getFile() {
-        return file;
+//    public List<byte[]> getListaFotos() {
+//        return listaFotos;
+//    }
+//
+//    public void setListaFotos(List<byte[]> listaFotos) {
+//        this.listaFotos = listaFotos;
+//    }
+
+    public UploadedFile getFoto() {
+        return foto;
     }
 
-    public void setFile(UploadedFile file) {
-        this.file = file;
+    public void setFoto(UploadedFile foto) {
+        this.foto = foto;
     }
 }

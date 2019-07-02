@@ -30,9 +30,12 @@
                 <p:inputTextarea id="observacao" value="#{produtoBean.produto.observacao}"
                                  rows="5" cols="20" maxlength="300"/>
 
-                <p:fileUpload fileUploadListener="#{produtoBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                <p:fileUpload fileUploadListener="#{produtoBean.fileUploadAdvanced}" mode="advanced" dragDropSupport="false"
                               auto="true" sequential="true"
-                              multiple="true" update="messages" sizeLimit="500000" fileLimit="10" allowTypes="/(\.|\/)(jpe?g|png)$/" />
+                              onstart="console.log('Iniciando envio de arquivo')"
+                              onerror="console.log('Erro na requisição de envio')"
+                              oncomplete="console.log('Envio concluído')"
+                              multiple="true" update=":form:messages" sizeLimit="500000" fileLimit="10" allowTypes="/(\.|\/)(jpe?g|png)$/" />
 
 
                 <h:panelGrid columns="3">

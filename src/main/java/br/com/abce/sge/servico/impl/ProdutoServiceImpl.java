@@ -3,6 +3,7 @@ package br.com.abce.sge.servico.impl;
 import br.com.abce.sge.dto.ProdutoDto;
 import br.com.abce.sge.entity.EstabelecimentoEntity;
 import br.com.abce.sge.entity.ProdutoEntity;
+import br.com.abce.sge.entity.ProdutoFotoEntity;
 import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.repository.EstabelecimentoRepository;
 import br.com.abce.sge.repository.ProdutoRepository;
@@ -102,6 +103,19 @@ public class ProdutoServiceImpl implements ProdutoService {
         produto.setDescricao(produto.getDescricao());
         produto.setSituacao(SIT_PRODUTO_ATIVO);
         produto.setEstabelecimentoByEstabelecimentoId(estabelecimento);
+
+        List<ProdutoFotoEntity> fotos = new ArrayList<>();
+
+        for (byte[] imagem : produtoDto.getListaFotos()) {
+
+            ProdutoFotoEntity produtoFotoEntity = new ProdutoFotoEntity();
+            produtoFotoEntity.setFoto(imagem);
+            produtoFotoEntity.setProdutoByProduto(produto);
+            produtoFotoEntity.setSituacao(1);
+            fotos.add(produtoFotoEntity);
+        }
+
+        produto.setProdutoFotosById(fotos);
 
         produtoRepository.salvar(produto);
 

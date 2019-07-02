@@ -117,7 +117,7 @@ public class ProdutoEntity {
         this.estabelecimentoByEstabelecimentoId = estabelecimentoByEstabelecimentoId;
     }
 
-    @OneToMany(mappedBy = "produtoByProduto")
+    @OneToMany(mappedBy = "produtoByProduto", cascade = CascadeType.ALL)
     public Collection<ProdutoFotoEntity> getProdutoFotosById() {
         return produtoFotosById;
     }

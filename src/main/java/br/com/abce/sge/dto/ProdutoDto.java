@@ -4,8 +4,10 @@ import io.swagger.annotations.ApiModel;
 
 import javax.ws.rs.FormParam;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@ApiModel(value = "Dados do Produto.")
+@ApiModel(value = "Dados do Produto")
 public class ProdutoDto implements Serializable {
 
     @FormParam("id")
@@ -21,8 +23,12 @@ public class ProdutoDto implements Serializable {
     @FormParam("idEstabelecimento")
     private Long idEstabelecimento;
 
+    private List<byte[]> listaFotos;
+
+
     public ProdutoDto() {
         super();
+        listaFotos = new ArrayList<>();
     }
 
     public Long getId() {
@@ -71,5 +77,13 @@ public class ProdutoDto implements Serializable {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public List<byte[]> getListaFotos() {
+        return listaFotos;
+    }
+
+    public void setListaFotos(List<byte[]> listaFotos) {
+        this.listaFotos = listaFotos;
     }
 }
