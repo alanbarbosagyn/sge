@@ -6,14 +6,14 @@ import br.com.abce.sge.servico.EstabelecimentoService;
 import br.com.abce.sge.util.FacesUtil;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class EstabelecimentoBean implements Serializable {
 
     private EstabelecimentoDto estabelecimento;
