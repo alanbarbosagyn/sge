@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="form">
+
+        <div style="text-align: right;">
+            <p:link style="margin-right: 25px; margin-top: 25px;" href="index.html" value="Início"/>
+        </div>
+
+        <p:growl autoUpdate="true" id="messages" showDetail="true" />
+        <p:panel id="itemAvaliacao">
+            <h:panelGrid>
+                <p:outputLabel for="tipo" value="Tipo: "/>
+                <p:inputText id="tipo" value="#{itemAvaliacaoBean.itemAvaliacao.tipo}" maxlength="10"/>
+                <p:outputLabel for="motivo" value="Motivo: "/>
+                <p:inputText id="motivo" value="#{itemAvaliacaoBean.itemAvaliacao.motivo}" maxlength="100"/>
+
+                <h:panelGrid columns="3">
+                    <p:commandButton id="salvar" update=":form:itemAvaliacao :form:messages"
+                                     value="Salvar" action="#{itemAvaliacaoBean.salvar()}"/>
+                    <p:commandButton id="limpar" update=":form:itemAvaliacao :form:messages"
+                                     value="Limpar" action="#{itemAvaliacaoBean.limpar()}"/>
+                    <p:commandButton id="buscar" update=":form:lista :form:messages"
+                                     value="Buscar" action="#{itemAvaliacaoBean.buscar()}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="lista">
+            <h:panelGrid style="margin-top: 25px;">
+                <p:dataTable var="item" value="#{itemAvaliacaoBean.listaItemAvaliacao}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="Id" style="text-align: center">
+                        <h:outputText value="#{item.id}" />
+                    </p:column>
+
+                    <p:column headerText="Tipo" style="text-align: center">
+                        <h:outputText value="#{item.tipo}" />
+                    </p:column>
+
+                    <p:column headerText="Motivo" style="text-align: center">
+                        <h:outputText value="#{item.motivo}" />
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:itemAvaliacao :form:messages" icon="pi pi-search" title="Alterar">
+                            <f:setPropertyActionListener value="#{item}" target="#{itemAvaliacaoBean.itemAvaliacao}" />
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:lista :form:messages" icon="pi pi-trash" title="Remover"
+                                         action="#{itemAvaliacaoBean.remover()}">
+                            <f:setPropertyActionListener value="#{item}" target="#{itemAvaliacaoBean.itemAvaliacao}" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

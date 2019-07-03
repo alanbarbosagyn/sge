@@ -10,9 +10,7 @@ import br.com.abce.sge.repository.UsuarioRepository;
 import br.com.abce.sge.repository.GarcomRepository;
 import br.com.abce.sge.servico.GarcomService;
 
-import javax.ejb.EJB;
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +28,7 @@ public class GarcomServiceImpl implements GarcomService {
     private GarcomRepository garcomRepository;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void salvar(final GarcomDto garcom) throws ValidacaoException {
 
         if (garcom == null)
