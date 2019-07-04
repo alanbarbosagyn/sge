@@ -1,10 +1,8 @@
 package br.com.abce.sge.servico.impl;
 
 import br.com.abce.sge.dto.EstabelecimentoDto;
-import br.com.abce.sge.dto.ProdutoDto;
 import br.com.abce.sge.entity.EnderecoEntity;
 import br.com.abce.sge.entity.EstabelecimentoEntity;
-import br.com.abce.sge.exceptions.RecursoNaoEncontradoException;
 import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.repository.EstabelecimentoRepository;
 import br.com.abce.sge.servico.EstabelecimentoService;

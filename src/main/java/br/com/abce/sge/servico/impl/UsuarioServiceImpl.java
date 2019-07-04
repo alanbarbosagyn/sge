@@ -1,8 +1,6 @@
 package br.com.abce.sge.servico.impl;
 
-import br.com.abce.sge.dto.ProdutoDto;
 import br.com.abce.sge.dto.UsuarioDto;
-import br.com.abce.sge.entity.ProdutoEntity;
 import br.com.abce.sge.entity.UsuarioEntity;
 import br.com.abce.sge.exceptions.ValidacaoException;
 import br.com.abce.sge.repository.UsuarioRepository;

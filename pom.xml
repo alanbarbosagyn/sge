@@ -213,6 +213,24 @@
     <profile>
       <id>desenv</id>
       <activation>
+<!--        <activeByDefault>true</activeByDefault>-->
+        <!-- activate if system properties 'env=dev' -->
+        <property>
+          <name>env</name>
+          <value>desenv</value>
+        </property>
+      </activation>
+      <properties>
+        <db.datasource>sge</db.datasource>
+        <db.url>jdbc:postgresql://localhost:5432/sge</db.url>
+        <db.username>postgres</db.username>
+        <db.password>postgres</db.password>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>homolog</id>
+      <activation>
         <activeByDefault>true</activeByDefault>
         <!-- activate if system properties 'env=dev' -->
         <property>
@@ -221,10 +239,10 @@
         </property>
       </activation>
       <properties>
-        <db.name>sge</db.name>
-        <db.url>jdbc:postgresql://localhost:5432/sge</db.url>
-        <db.username>postgres</db.username>
-        <db.password>postgres</db.password>
+        <db.datasource>sge_heroku</db.datasource>
+        <db.url>jdbc:postgresql://ec2-54-83-205-27.compute-1.amazonaws.com:5432/d6uecaija3nh56</db.url>
+        <db.username>ahkpubvnvbiqrk</db.username>
+        <db.password>2d407472b0033c3e27faa0bb4a6c9104fafd35b98129009f7594de4cbfa6902a</db.password>
       </properties>
     </profile>
 
@@ -238,7 +256,7 @@
         </property>
       </activation>
       <properties>
-        <db.name>DATABASE</db.name>
+        <db.datasource>DATABASE</db.datasource>
         <db.url>DATABASE_URL</db.url>
         <db.username>DATABASE_USER</db.username>
         <db.password>DATABASE_PASSWORD</db.password>
